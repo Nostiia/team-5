@@ -7,5 +7,5 @@ handlers:
 # Serve php scripts.
 - url: .*
   script: auto
-  runtime_config:
+runtime_config:
   document_root: public
