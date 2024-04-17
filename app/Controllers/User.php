@@ -101,23 +101,15 @@ class User extends Controller
                 'name' => $request->getVar('name'),
                 'email' => $request->getVar('email'),
                 'password' => password_hash($request->getVar('password'), PASSWORD_DEFAULT),
-                'image' => '',
                 'description' => $request->getVar('description'),
                 
             ];
 
-            if ($file = $this->request->getFile('image'))
-            {
-                if (! $file->isValid())
-                {
-                    throw new \RuntimeException($file->getErrorString().'('.$file->getError().')');
-                }
-                if ($file->isValid() && ! $file->hasMoved())
-                {
-                    $newName = $file->getRandomName();
-                    $file->move(WRITEPATH . 'uploads', $newName); // Save uploaded file to the uploads directory
-                    $data['image'] = 'uploads/' . $newName; // Update image field with file path
-                }
+            // Handle file upload
+            $file = $request->getFile('userfile');
+            if ($file->isValid() && ! $file->hasMoved()) {
+                $imageData = file_get_contents($file->getTempName()); // Read file contents
+                $data['image'] = base64_encode($imageData); // Convert to base64 and store in database
             }
 
             // Insert user data into the database

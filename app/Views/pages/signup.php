@@ -1,5 +1,5 @@
 <main class="flex-shrink-0">
-    <?= form_open('user/signup') ?>
+    <?= form_open('user/signup',['enctype' => 'multipart/form-data']) ?>
     <div class="container">
         <style>
             form {padding-top: 20px;}
@@ -26,8 +26,8 @@
             </div>
             <div class="form-row">
                 <div class="mb-3">
-                    <label for="image" class="form-label">Photo of your band</label>
-                    <input class="form-control" type="file" name="image" id="formFile">
+                    <label for="userfile" class="form-label">Photo of your band</label>
+                    <input class="form-control" type="file" name="userfile" id="formFile">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
