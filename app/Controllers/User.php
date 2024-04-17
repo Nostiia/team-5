@@ -74,4 +74,66 @@ class User extends Controller
         return redirect()->to(base_url('pages/login'));
     }
 
+    public function getSignup()
+    {
+        $data['content'] = view('pages/signup');
+        echo view("templates/header", $data);
+        echo view("templates/navbar", $data);
+        echo view("pages/signup", $data);
+        echo view("templates/footer", $data);
+    }
+
+    public function postSignup()
+    {
+        $request = \Config\Services::request();
+        $validation = \Config\Services::validation();
+
+        $rules = [
+            "name" => "required",
+            "email" => "required|valid_email|is_unique[user.email]",
+            "password" => "required|min_length[6]",
+            // Add more validation rules as needed
+        ];
+
+        if ($this->validate($rules)) {
+            // Get form input data
+            $data = [
+                'name' => $request->getVar('name'),
+                'email' => $request->getVar('email'),
+                'password' => password_hash($request->getVar('password'), PASSWORD_DEFAULT),
+                'image' => '',
+                'description' => $request->getVar('description'),
+                
+            ];
+
+            if ($file = $this->request->getFile('image'))
+            {
+                if (! $file->isValid())
+                {
+                    throw new \RuntimeException($file->getErrorString().'('.$file->getError().')');
+                }
+                if ($file->isValid() && ! $file->hasMoved())
+                {
+                    $newName = $file->getRandomName();
+                    $file->move(WRITEPATH . 'uploads', $newName); // Save uploaded file to the uploads directory
+                    $data['image'] = 'uploads/' . $newName; // Update image field with file path
+                }
+            }
+
+            // Insert user data into the database
+            $userModel = new \App\Models\UserModel();
+            $userModel->insert($data);
+
+            // Redirect to a success page or login page
+            return redirect()->to(base_url('user/login'));
+        } else {
+            // If validation fails, return to sign-up form with errors
+            $data["errors"] = $validation->getErrors();
+            $data['content'] = view('pages/signup', $data);
+            echo view("templates/header", $data);
+            echo view("templates/navbar", $data);
+            echo view("pages/signup", $data);
+            echo view("templates/footer", $data);
+        }
+    }
 }

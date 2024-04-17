@@ -25,7 +25,7 @@
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <div>
-                <a href="<?php echo base_url('pages/view/signup'); ?>">Create new account</a>
+                <a href="<?php echo base_url('user/SignUp'); ?>">Create new account</a>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

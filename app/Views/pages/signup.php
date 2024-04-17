@@ -1,37 +1,37 @@
 <main class="flex-shrink-0">
+    <?= form_open('user/signup') ?>
     <div class="container">
+        <style>
+            form {padding-top: 20px;}
+        </style>
         <form>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <label for="validationDefault01">First name</label>
-                    <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
+                    <label for="name">Name of the band</label>
+                    <input type="text" class="form-control" id="validationDefault01" placeholder="Band" name="name" required>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="validationDefault02">Last name</label>
-                    <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="validationDefaultUsername">Username</label>
+                    <label for="email">E-mail</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupPrepend2">@</span>
                         </div>
-                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="E-mail" aria-describedby="inputGroupPrepend2" name="email" required>
                     </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="password">Password</label>
+                    <input type="text" class="form-control" id="validationDefault02" placeholder="Password" name="password" required>
                 </div>
             </div>
             <div class="form-row">
-                <div class="col-md-6 mb-3">
-                    <label for="validationDefault03">City</label>
-                    <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Photo of your band</label>
+                    <input class="form-control" type="file" name="image" id="formFile">
                 </div>
-                <div class="col-md-3 mb-3">
-                    <label for="validationDefault04">State</label>
-                    <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <label for="validationDefault05">Zip</label>
-                    <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -45,4 +45,5 @@
             <button class="btn btn-primary" type="submit">Submit form</button>
         </form>
     </div>
+    </form>
 </main>
