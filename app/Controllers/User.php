@@ -24,7 +24,7 @@ class User extends Controller
     }
     public function getUser_ok()
     {
-        $data['content'] = view('user/user_ok', ['name'=> session()->user->name]);
+        $data['content'] = view('user/user_ok', ['name'=> session()->user->name, 'description'=> session()->user->description]);
         echo view("templates/header", $data);
         echo view("templates/navbar", $data);
         echo view("user/user_ok", $data);
