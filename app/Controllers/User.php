@@ -24,7 +24,15 @@ class User extends Controller
     }
     public function getUser_ok()
     {
-        $data['content'] = view('user/user_ok', ['name'=> session()->user->name, 'description'=> session()->user->description]);
+        $userId = session()->user->id;
+
+    // Load the UserModel
+        $userModel = new \App\Models\UserModel();
+
+    // Retrieve the user by ID
+        $user = $userModel->find($userId);
+        $image = 'data:image/jpeg;base64,' . base64_encode($user->image);
+        $data['content'] = view('user/user_ok', ['name'=> session()->user->name, 'description'=> session()->user->description, 'image'=> $image]);
         echo view("templates/header", $data);
         echo view("templates/navbar", $data);
         echo view("user/user_ok", $data);

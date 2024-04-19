@@ -29,7 +29,7 @@
 </div>
 <div>
     <div class="circle-photo">
-        <img src="https://i.pinimg.com/originals/d2/61/21/d2612159591ef243d0caf8e4758b78c2.jpg" alt="Profile Photo">
+        <img src="<?=$image?>" alt="Profile Photo">
     </div>
     <div>
         <h3><?=$name?></h3>
