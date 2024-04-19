@@ -27,7 +27,7 @@
             <div class="form-row">
                 <div class="mb-3">
                     <label for="userfile" class="form-label">Photo of your band</label>
-                    <input class="form-control" type="file" name="userfile" id="formFile">
+                    <input class="form-control" type="file" name="userfile" id="formFile" accept="image/*">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
@@ -46,4 +46,53 @@
         </form>
     </div>
     </form>
+    <script>
+    document.getElementById('imageInput').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+
+        var img = document.createElement('img');
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            img.src = e.target.result;
+
+            img.onload = function() {
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                var MAX_WIDTH = 200;
+                var MAX_HEIGHT = 200;
+                var width = img.width;
+                var height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                ctx.drawImage(img, 0, 0, width, height);
+
+                canvas.toBlob(function(blob) {
+                    var resizedFile = new File([blob], file.name, {
+                        type: 'image/jpeg',
+                        lastModified: Date.now()
+                    });
+                    var newFileInput = document.createElement('input');
+                    newFileInput.type = 'file';
+                    newFileInput.files = [resizedFile];
+                    newFileInput.name = 'userfile';
+                    document.getElementById('imageInput').parentNode.replaceChild(newFileInput, document.getElementById('imageInput'));
+                }, 'image/jpeg', 0.8);
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+    </script>
 </main>
