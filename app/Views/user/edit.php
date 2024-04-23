@@ -36,7 +36,8 @@
         <form>
             <div class="form-row">
                 <div class="circle-photo">
-                    <img src="<?= $image ?>" alt="Profile Photo">
+                    <!-- Apply esc() to the image source -->
+                    <img src="<?= esc($image) ?>" alt="Profile Photo">
                 </div>
                 <div>
                     <label for="userfile" class="form-label">Photo of your band</label>
@@ -44,8 +45,9 @@
                 </div>
                 <div>
                     <label for="name">Name of the band</label>
+                    <!-- Apply esc() to the input value -->
                     <input type="text" class="form-control" id="validationDefault01" placeholder="Band"
-                        value="<?= $name ?>" name="name" required>
+                        value="<?= esc($name) ?>" name="name" required>
                 </div>
                 <div>
                     <label for="email">E-mail</label>
@@ -53,8 +55,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupPrepend2">@</span>
                         </div>
+                        <!-- Apply esc() to the input value -->
                         <input type="text" class="form-control" id="validationDefaultUsername" placeholder="E-mail"
-                            aria-describedby="inputGroupPrepend2" name="email" value="<?= $email ?>" required>
+                            aria-describedby="inputGroupPrepend2" name="email" value="<?= esc($email) ?>" required>
                     </div>
                 </div>
                 <div>
@@ -66,8 +69,9 @@
             <div class="form-row text">
                 <div>
                     <label for="description" class="form-label">Description</label>
+                    <!-- Apply esc() to the textarea value -->
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                        name="description"><?= $description ?></textarea>
+                        name="description"><?= esc($description) ?></textarea>
                 </div>
             </div>
             <div class="form-group">

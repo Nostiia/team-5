@@ -6,6 +6,18 @@ use CodeIgniter\Config\BaseConfig;
 
 class App extends BaseConfig
 {
+
+     /**
+     * --------------------------------------------------------------------------
+     * Debug View
+     * --------------------------------------------------------------------------
+     *
+     * If true, CodeIgniter will display debug views in case of errors,
+     * including additional data for debugging purposes. If false, only
+     * the error message will be displayed without additional debug data.
+     */
+    public bool $debugView = false;
+
     /**
      * --------------------------------------------------------------------------
      * Base Site URL

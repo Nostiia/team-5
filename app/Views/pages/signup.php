@@ -8,7 +8,7 @@
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="name">Name of the band</label>
-                    <input type="text" class="form-control" id="validationDefault01" placeholder="Band" name="name" required>
+                    <input type="text" class="form-control" id="validationDefault01" placeholder="Band" name="name" value="<?= esc($name ?? '') ?>" required>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="email">E-mail</label>
@@ -16,12 +16,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupPrepend2">@</span>
                         </div>
-                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="E-mail" aria-describedby="inputGroupPrepend2" name="email" required>
+                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="E-mail" aria-describedby="inputGroupPrepend2" name="email" value="<?= esc($email ?? '') ?>" required>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="password">Password</label>
-                    <input type="text" class="form-control" id="validationDefault02" placeholder="Password" name="password" required>
+                    <input type="text" class="form-control" id="validationDefault02" placeholder="Password" name="password" value="<?= esc($password ?? '') ?>" required>
                 </div>
             </div>
             <div class="form-row">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"><?= esc($description ?? '') ?></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -96,3 +96,4 @@
     });
     </script>
 </main>
+
