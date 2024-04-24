@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class User extends Controller
 {
@@ -50,11 +51,15 @@ class User extends Controller
             $image = ''; // Set a default image path or leave it empty
         }
 
+        $concertModel = new \App\Models\ConcertModel();
+        $concerts = $concertModel->getConcertsByMusician($userId);
+
         // Pass data to the view
         $data['content'] = view('user/user_ok', [
             'name' => session()->user->name,
             'description' => session()->user->description,
-            'image' => $image
+            'image' => $image,
+            'concerts' => $concerts
         ]);
 
         // Load views
@@ -183,11 +188,15 @@ class User extends Controller
             $image = ''; // Set a default image path or leave it empty
         }
 
+        $concertModel = new \App\Models\ConcertModel();
+        $concerts = $concertModel->getConcertsByMusician($userId);
+
         $data['content'] = view('user/user_ok', [
             'name' => session()->user->name,
             'description' => session()->user->description,
             'email' => session()->user->email,
-            'image' => $image
+            'image' => $image,
+            'concerts' => $concerts
         ]);
 
         $data['content'] = view('user/edit');
@@ -263,4 +272,97 @@ class User extends Controller
             echo view("templates/footer", $data);
         }
     }
+
+    public function getAdd()
+    {
+        $data['content'] = view('user/add_concert');
+        echo view("templates/header", $data);
+        echo view("templates/navbar", $data);
+        echo view("user/add_concert", $data);
+        echo view("templates/footer", $data);
+    }
+    public function postAdd()
+    {
+
+        $request = \Config\Services::request();
+        $validation = \Config\Services::validation();
+
+        $rules = [
+            "name" => "required",
+            "city" => "required",
+            "concert_data" => "required",
+            "link" => "required"
+            // Add more validation rules as needed
+        ];
+
+        if ($this->validate($rules)) {
+            // Get form input data
+            $data = [
+                'user_id' => session()->user->id,
+                'name' => $request->getVar('name'),
+                'city' => $request->getVar('city'),
+                'concert_data' => $request->getVar('concert_data'),
+                'link' => $request->getVar('link')
+                // Add more fields as needed
+            ];
+
+            // Insert concert data into the database
+            $concertModel = new \App\Models\ConcertModel();
+            $concertModel->insert($data);
+
+            // Redirect to a success page or back to the add concert page
+            return redirect()->to(base_url('user/user_ok'));
+        } else {
+            // If validation fails, return to add concert form with errors
+            $data["errors"] = $validation->getErrors();
+            $data['content'] = view('pages/add_concert', $data);
+            echo view("templates/header", $data);
+            echo view("templates/navbar", $data);
+            echo view("pages/add_concert", $data);
+            echo view("templates/footer", $data);
+        }
+    }
+
+    public function getProfile($id)
+    {
+        // Load musician data from the UserModel
+        $musicianModel = new \App\Models\UserModel();
+        $musician = $musicianModel->find($id);
+
+        if (!$musician) {
+            return redirect()->to(base_url());
+        }
+
+        // Check if the musician has an image
+        if (isset($musician->image)) {
+            // Construct the image data URI
+            $imageData = base64_encode($musician->image);
+            $imageMimeType = 'image/jpeg'; // Change this to match your image MIME type if needed
+            $image = 'data:' . $imageMimeType . ';base64,' . $imageData;
+        } else {
+            // If the musician does not have an image, set a placeholder image
+            $image = ''; // Set a default image path or leave it empty
+        }
+
+        $concertModel = new \App\Models\ConcertModel();
+        $concerts = $concertModel->getConcertsByMusician($id);
+
+
+        // Load the profile view with musician data
+        $data = [
+            'name' => $musician->name,
+            'description' => $musician->description,
+            'email' => $musician->email,
+            'image' => $image,
+            'concerts' => $concerts
+        ];
+        $data['content'] = view('pages/profile', $data);
+
+        // Load the views
+        echo view("templates/header", $data);
+        echo view("templates/navbar", $data);
+        echo view("pages/profile", $data);
+        echo view("templates/footer", $data);
+    }
+
 }

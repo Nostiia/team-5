@@ -29,7 +29,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <!-- Use esc() to escape the URL -->
-                      <a href="<?= esc(base_url('musician/profile/' . $musician->id)) ?>"
+                      <a href="<?= base_url('user/profile/' . $musician->id) ?>"
                         class="btn btn-sm btn-outline-secondary">View Profile</a>
                     </div>
                   </div>

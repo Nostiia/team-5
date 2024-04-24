@@ -58,8 +58,8 @@
       <img src="<?= esc($image) ?>" alt="Profile Photo">
     </div>
     <div class="buttons">
-      <button type="button" class="btn btn-dark edit-button"><a class="edit" href="<?= esc(base_url('user/Edit')) ?>">Edit</a></button>
-      <button type="button" class="btn btn-dark edit-button"><a class="edit" href="<?= esc(base_url('user/Edit')) ?>">Add concert</a></button>
+      <button type="button" class="btn btn-dark edit-button"><a class="edit" href="<?= esc(base_url('user/edit')) ?>">Edit</a></button>
+      <button type="button" class="btn btn-dark edit-button"><a class="edit" href="<?= esc(base_url('user/add')) ?>">Add concert</a></button>
     </div>
     <div class="buttons">
       <a href="https://www.youtube.com/"><button type="button" class="btn btn-outline-danger"><i class="bi bi-youtube"></i></button></a>
@@ -73,3 +73,37 @@
     <h5><?= esc($description) ?></h5>
   </div>
 </div>
+<div class="col text-center">
+    <h3>Concerts:</h3>
+</div>
+<div class="container">
+    <div class="row">
+        <?php foreach ($concerts as $concert): ?>
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm ">
+                    <div class="card-body">
+                        <!-- Use esc() to escape the musician name and description -->
+                        <h5 class="card-title"><?= esc($concert->name) ?></h5>
+                        <ul class="card-text">
+                            <li><?= esc($concert->city) ?></li>
+                            <li><?= esc($concert->concert_data) ?></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-secondary buy-ticket-btn"
+                        data-link="<?= esc($concert->link) ?>">Buy Ticket</button>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<script>
+    // Add event listener to all buy ticket buttons
+    document.querySelectorAll('.buy-ticket-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            // Get the link from the button's data attribute
+            const link = this.getAttribute('data-link');
+            // Redirect to the link
+            window.location.href = link;
+        });
+    });
+</script>

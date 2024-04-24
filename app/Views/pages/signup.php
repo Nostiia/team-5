@@ -27,11 +27,11 @@
             <div class="form-row">
                 <div class="mb-3">
                     <label for="userfile" class="form-label">Photo of your band</label>
-                    <input class="form-control" type="file" name="userfile" id="formFile" accept="image/*">
+                    <input class="form-control" type="file" name="userfile" id="formFile" accept="image/*" required>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"><?= esc($description ?? '') ?></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" required><?= esc($description ?? '') ?></textarea>
                 </div>
             </div>
             <div class="form-group">
