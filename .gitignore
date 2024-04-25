@@ -1,1 +1,13 @@
 vendor/
+.env
+node_modules/
+*.log
+*.swp
+*.tmp
+*~
+bin/
+obj/
+build/
+/coverage
+/.vscode
+
