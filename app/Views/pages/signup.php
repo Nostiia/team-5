@@ -16,12 +16,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupPrepend2">@</span>
                         </div>
-                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="E-mail" aria-describedby="inputGroupPrepend2" name="email" value="<?= esc($email ?? '') ?>" required>
+                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="E-mail" aria-describedby="inputGroupPrepend2" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Enter a valid email address" value="<?= esc($email ?? '') ?>" required>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="password">Password</label>
-                    <input type="text" class="form-control" id="validationDefault02" placeholder="Password" name="password" value="<?= esc($password ?? '') ?>" required>
+                    <input type="text" class="form-control" id="validationDefault02" placeholder="Password" name="password" pattern="(?=.*\d).{8,}" title="Password must be at least 8 characters long and contain at least one digit" value="<?= esc($password ?? '') ?>" required>
                 </div>
             </div>
             <div class="form-row">

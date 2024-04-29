@@ -5,7 +5,14 @@ class Pages extends BaseController
 {
     public function getIndex()
     {
-        return view("welcome_message");
+        $musicianModel = new \App\Models\UserModel();
+        $musicians = $musicianModel->findAll();
+
+        // Pass musician data to the view
+        $data['musicians'] = $musicians;
+
+        // Load the main page view with musician data
+        return view('pages/home', $data);
     }
     public function getView($page = "home")
     {
