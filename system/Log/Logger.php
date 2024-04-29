@@ -17,8 +17,11 @@ use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Throwable;
 
+<<<<<<< HEAD
 define('CI_DEBUG',true);
 
+=======
+>>>>>>> parent of 8a752e9 (Update Logger.php)
 /**
  * The CodeIgntier Logger
  *
