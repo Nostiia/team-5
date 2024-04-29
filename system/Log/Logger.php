@@ -17,6 +17,8 @@ use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Throwable;
 
+define('CI_DEBUG',true);
+
 /**
  * The CodeIgntier Logger
  *
