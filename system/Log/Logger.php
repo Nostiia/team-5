@@ -19,11 +19,8 @@ use Throwable;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 define('CI_DEBUG',true);
 
-=======
->>>>>>> parent of 8a752e9 (Update Logger.php)
 =======
 >>>>>>> parent of 8a752e9 (Update Logger.php)
 =======
