@@ -130,10 +130,10 @@ class User extends Controller
         $rules = [
             "name" => "required",
             "email" => "required|valid_email|is_unique[user.email]",
-            "password" => "required|min_length[6]",
+            "password" => "required|min_length[6]|regex_match[/^(?=.*\d).+$/]",
             // Add more validation rules as needed
         ];
-
+        
         if ($this->validate($rules)) {
             // Get form input data
             $data = [
