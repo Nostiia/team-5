@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `concerts`
 --
 
-CREATE TABLE `concerts` (
+/*!CREATE TABLE `concerts` (
   `id` int(100) NOT NULL,
   `user_id` int(100) UNSIGNED NOT NULL,
   `city` varchar(255) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `concerts` (
   `link` varchar(255) NOT NULL,
   `name` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
+*/
 --
 -- Dumping data for table `concerts`
 --
@@ -53,14 +53,14 @@ INSERT INTO `concerts` (`id`, `user_id`, `city`, `concert_data`, `link`, `name`)
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+/*!CREATE TABLE `user` (
   `id` int(100) UNSIGNED NOT NULL,
   `name` varchar(64) NOT NULL,
   `email` varchar(64) NOT NULL,
   `image` longblob NOT NULL,
   `description` varchar(1024) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;*/
 
 --
 -- Dumping data for table `user`
