@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2024 at 03:40 PM
+-- Generation Time: Apr 30, 2024 at 10:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `concerts`
 --
 
+DROP TABLE IF EXISTS `concerts`;
 CREATE TABLE `concerts` (
   `id` int(100) NOT NULL,
   `user_id` int(100) UNSIGNED NOT NULL,
@@ -53,6 +54,7 @@ INSERT INTO `concerts` (`id`, `user_id`, `city`, `concert_data`, `link`, `name`)
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(100) UNSIGNED NOT NULL,
   `name` varchar(64) NOT NULL,
