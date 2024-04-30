@@ -365,4 +365,58 @@ class User extends Controller
         echo view("templates/footer", $data);
     }
 
+    public function getConcerts()
+    {
+        $concertModel = new \App\Models\ConcertModel();
+        $concerts = $concertModel->findAll();
+
+        // Initialize an empty array to store concerts grouped by month
+        $concertsByMonth = [];
+
+        foreach ($concerts as $concert) {
+            // Extract the month from the concert date
+            $month = date('F', strtotime($concert->concert_data));
+
+            // Initialize the array for this month if it doesn't exist yet
+            if (!isset($concertsByMonth[$month])) {
+                $concertsByMonth[$month] = [];
+            }
+
+            // Retrieve musician details for this concert
+            $musicianModel = new \App\Models\UserModel();
+            $musician = $musicianModel->find($concert->user_id);
+
+            // Prepare the image data URI for the musician's image
+            if (isset($musician->image)) {
+                $imageData = base64_encode($musician->image);
+                $imageMimeType = 'image/jpeg'; // Change this to match your image MIME type if needed
+                $image = 'data:' . $imageMimeType . ';base64,' . $imageData;
+            } else {
+                $image = ''; // Set a default image path or leave it empty
+            }
+
+            // Prepare the concert data for this iteration
+            $concertData = [
+                'band' => $musician->name,
+                'image' => $image,
+                'city' => $concert->city,
+                'concert_data' => $concert->concert_data,
+                'name' => $concert->name,
+                'link'=>$concert->link
+            ];
+
+            // Push the concert data to the array for this month
+            $concertsByMonth[$month][] = $concertData;
+        }
+
+        $data['concertsByMonth'] = $concertsByMonth;
+
+        // Load the view
+        echo view("templates/header");
+        echo view("templates/navbar");
+        echo view("pages/concerts", $data);
+        echo view("templates/footer");
+    }
+
+
 }
