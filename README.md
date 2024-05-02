@@ -2,6 +2,14 @@
 
 Welcome to Music Home! 
 
+Link to the repository:
+
+https://github.com/Nostiia/team-five
+
+Link to the deployed version:
+
+https://wbt2323-5-ah.oa.r.appspot.com
+
 This is a place where musicians can store general data and publish information about concerts that will be soon with all information. 
 
 Users can find new musicians, that can be interesting for them and know about concert information in comfort way.
